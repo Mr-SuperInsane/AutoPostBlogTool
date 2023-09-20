@@ -1,0 +1,2 @@
+# AutoPostBlogTool
+wordpressブログ自動投稿ツール
