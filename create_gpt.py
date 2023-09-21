@@ -1,8 +1,9 @@
-# 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
-
 import openai
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
-openai.api_key = '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'
+openai.api_key = os.environ["GPT_API"]
 
 def create_title(theme):
     res = openai.ChatCompletion.create(
