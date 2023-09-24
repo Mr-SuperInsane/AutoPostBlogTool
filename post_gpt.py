@@ -7,7 +7,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-CONTENT = 'ゲーミングパソコン'
+CONTENT = 'スーパーコンピュータ'
 CATEGORY = 'パソコン'
 
 category_dict = {'パソコン':[4], 'スマホ/タブレット':[1], 'オーディオ':[6,10], 'キーボード':[8,6] , 'マウス':[9,6]}
@@ -18,7 +18,6 @@ def tweet(content):
     at = os.environ["ACCESS_TOKEN"]
     ats = os.environ["ACCESS_SECRET_TOKEN"]
 
-    content = 'テストツイート'
     try:
         client = tweepy.Client(consumer_key=ck, consumer_secret=cs, access_token=at, access_token_secret=ats)
         res = client.create_tweet(text=content)
@@ -30,13 +29,11 @@ def tweet(content):
 
 
 title_list = create_title(theme='パソコン')
-for title in title_list:
-    md = ''
+for i, title in enumerate(title_list):
+    print(f'No.{i+1}の記事を執筆しています')
     headline_list = create_headline(title)
-    for headline in headline_list:
-        content = create_content(title, headline)
-        md += f'## {headline}\n\n{content}\n\n'
-
+    # 内容をすべて関数内で生成
+    md = create_content(title, headline_list)
     html = markdown.markdown(md)
     status = 'draft'
     payload = {'title': title ,'content' : html ,'status' : status, 'categories': category_dict[CATEGORY]}
